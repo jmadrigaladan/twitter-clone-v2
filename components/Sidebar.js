@@ -9,11 +9,15 @@ import {
   DotsCircleHorizontalIcon,
 } from "@heroicons/react/outline";
 
+import Image from "next/image";
+
 export default function Sidebar() {
   return (
-    <div className="hidden sm:flex flex-col fixed">
-      <div> Logo </div>
-      <nav>
+    <div className="h-full hidden sm:flex flex-col fixed xl:ml-24">
+      <nav className="h-full relative xl:space-y-1.5">
+        <div className="flex justify-center items-center xl:justify-start py-3 xl:p-3">
+          <Image src={"/assets/twitter-logo.png"} width={34} height={34} />
+        </div>
         <SidebarLink text={"Home"} Icon={HomeIcon} />
         <SidebarLink text={"Explore"} Icon={HashtagIcon} />
         <SidebarLink text={"Notifications"} Icon={BellIcon} />
@@ -21,6 +25,10 @@ export default function Sidebar() {
         <SidebarLink text={"Bookmarks"} Icon={BookmarkIcon} />
         <SidebarLink text={"Profile"} Icon={UserIcon} />
         <SidebarLink text={"More"} Icon={DotsCircleHorizontalIcon} />
+        <button className=" hidden xl:inline bg-[#1d9bf0] rounded-full h-[52px] mt-2 w-[200px] text-lg font-bold">
+          Tweet
+        </button>
+        <div className="absolute bottom-0">User</div>
       </nav>
     </div>
   );
@@ -29,7 +37,7 @@ export default function Sidebar() {
 function SidebarLink({ text, Icon }) {
   return (
     <>
-      <li className="flex mb-6 items-center text-xl space-x-3">
+      <li className="hoverAnimation flex mb-3 justify-center xl:justify-start items-center text-xl space-x-3">
         <Icon className="h-7" />
         <span className="hidden xl:inline">{text}</span>
       </li>
