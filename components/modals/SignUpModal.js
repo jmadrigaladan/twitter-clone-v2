@@ -4,6 +4,7 @@ import { closeSignUpModal, openSignUpModal } from "@/redux/modalSlice";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -19,7 +20,7 @@ export default function SignUpModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const router = useRouter()
+  const router = useRouter();
 
   async function handleSignUp() {
     const userCredentials = await createUserWithEmailAndPassword(
@@ -35,8 +36,13 @@ export default function SignUpModal() {
       )}.png`,
     });
 
-    router.reload()
+    router.reload();
   }
+
+  async function handleGuestSignIn() {
+    await signInWithEmailAndPassword(auth, "guest@gmail.com", "User12345");
+  }
+  
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -72,7 +78,10 @@ export default function SignUpModal() {
       >
         <div className="w-[90%] h-[600px] bg-black md:w-[560px] md:h-[600px] border border-gray-700 rounded-lg flex justify-center text-white">
           <div className="w-[90%] mt-8 flex flex-col ">
-            <button className="bg-white text-black w-full font-bold text-lg p-2 rounded-md">
+            <button
+              className="bg-white text-black w-full font-bold text-lg p-2 rounded-md"
+              onClick={handleGuestSignIn}
+            >
               Sign In as Guest
             </button>
             <h1 className="text-center mt-4 font-bold text-lg">or</h1>

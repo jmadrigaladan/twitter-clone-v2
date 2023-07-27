@@ -1,4 +1,5 @@
 import BottomBaner from "@/components/BottomBaner";
+import CommentModal from "@/components/modals/CommentModal";
 import PostFeed from "@/components/Postfeed";
 import Sidebar from "@/components/Sidebar";
 import Trending from "@/components/Trending";
@@ -13,6 +14,8 @@ export default function Home() {
         <PostFeed />
         <Trending />
       </div>
+
+      <CommentModal />
 
       {!username && <BottomBaner />}
     </div>

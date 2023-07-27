@@ -1,4 +1,5 @@
 import { auth } from "@/firebase";
+import { closeLogInModal, closeSignUpModal } from "@/redux/modalSlice";
 import { signOutUser } from "@/redux/userSlice";
 import {
   HomeIcon,
@@ -23,6 +24,8 @@ export default function Sidebar() {
   async function handleSignOut() {
     await signOut(auth);
     dispatch(signOutUser());
+    dispatch(closeSignUpModal());
+    dispatch(closeLogInModal());
   }
 
   return (
@@ -57,7 +60,7 @@ export default function Sidebar() {
           <DotsHorizontalIcon className="h-5 hidden xl:inline" />
         </div>
       </nav>
-    </div> 
+    </div>
   );
 }
 

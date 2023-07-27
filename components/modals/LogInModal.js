@@ -16,6 +16,10 @@ export default function LogInModal() {
     await signInWithEmailAndPassword(auth, email, password);
   }
 
+  async function handleGuestSignIn() {
+    await signInWithEmailAndPassword(auth, "guest@gmail.com", "User12345");
+  }
+
   return (
     <>
       <button
@@ -55,7 +59,10 @@ export default function LogInModal() {
               Sign In
             </button>
             <h1 className="text-center mt-8 font-bold text-lg">or</h1>
-            <button className="bg-white text-black w-full font-bold text-lg p-2 rounded-md mt-4">
+            <button
+              className="bg-white text-black w-full font-bold text-lg p-2 rounded-md mt-4"
+              onClick={handleGuestSignIn}
+            >
               Sign In as Guest
             </button>
           </div>
