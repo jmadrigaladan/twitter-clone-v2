@@ -12,6 +12,7 @@ import {
 import { db } from "@/firebase";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
+import { useRouter } from "next/router";
 export default function CommentModal() {
   const isOpen = useSelector((state) => state.modals.commentModalOpen);
   const userImg = useSelector((state) => state.user.photoUrl);
@@ -19,6 +20,7 @@ export default function CommentModal() {
   const tweetDetails = useSelector((state) => state.modals.commentTweetDetails);
 
   const [comment, setComment] = useState("");
+  const router = useRouter();
 
   async function sendComment() {
     const docRef = doc(db, "posts", tweetDetails.id);
@@ -31,6 +33,8 @@ export default function CommentModal() {
     await updateDoc(docRef, {
       comments: arrayUnion(commentDetails),
     });
+    dispatch(closeCommentModal());
+    router.push("/" + tweetDetails.id);
   }
 
   const dispatch = useDispatch();

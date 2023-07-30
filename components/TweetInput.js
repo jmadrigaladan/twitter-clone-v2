@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 export default function TweetInput() {
   const user = useSelector((state) => state.user);
   const [text, setText] = useState("");
+  // const [image, setImage] = useState(false);
 
   async function sendTweet() {
     const docRef = await addDoc(collection(db, "posts"), {
@@ -31,7 +32,7 @@ export default function TweetInput() {
   return (
     <div className="flex space-x-3 p-3 border-b border-gray-700">
       <img
-        src="/assets/kylie.png"
+        src={user.photoUrl || "/assets/twitter-logo.png"}
         alt=""
         className="w-11 h-11 rounded-full object-cover"
       />
